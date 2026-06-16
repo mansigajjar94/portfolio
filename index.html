@@ -37,8 +37,8 @@
     />
 
     <link rel="stylesheet" href="assets/css/reset.css" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <script src="assets/js/main.js" defer></script>
+    <link rel="stylesheet" href="assets/css/styles.css?v=3" />
+    <script src="assets/js/main.js?v=3" defer></script>
   </head>
 
   <body>
@@ -171,41 +171,67 @@
           <div class="stage">
             <div class="stage__arc" data-arc aria-hidden="true"></div>
             <div class="avatar" aria-hidden="true">
-              <svg viewBox="0 0 140 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a person sitting cross-legged">
+              <svg viewBox="0 0 160 184" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a woman sitting cross-legged">
                 <defs>
-                  <linearGradient id="hoodie" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0" stop-color="#fbbf24" />
-                    <stop offset="1" stop-color="#f59e0b" />
+                  <radialGradient id="av-skin" cx="50%" cy="38%" r="72%">
+                    <stop offset="0" stop-color="#f2c49d" />
+                    <stop offset="1" stop-color="#d99c6f" />
+                  </radialGradient>
+                  <linearGradient id="av-hair" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#3c2b24" />
+                    <stop offset="1" stop-color="#211511" />
+                  </linearGradient>
+                  <linearGradient id="av-top" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#34d8c3" />
+                    <stop offset="1" stop-color="#0e9488" />
+                  </linearGradient>
+                  <linearGradient id="av-pants" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#3a3552" />
+                    <stop offset="1" stop-color="#262236" />
+                  </linearGradient>
+                  <linearGradient id="av-ear" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#fb7185" />
+                    <stop offset="1" stop-color="#c084fc" />
                   </linearGradient>
                 </defs>
-                <!-- crossed legs -->
-                <path d="M70 106 C 44 106, 30 124, 30 138 C 30 147, 39 149, 49 146 L 91 146 C 101 149, 110 147, 110 138 C 110 124, 96 106, 70 106 Z" fill="#2e2e38" />
-                <!-- shoes -->
-                <ellipse cx="51" cy="146" rx="9" ry="5.5" fill="#eef0f4" />
-                <ellipse cx="89" cy="146" rx="9" ry="5.5" fill="#eef0f4" />
-                <!-- arms -->
-                <path d="M53 92 Q 47 112, 69 113" fill="none" stroke="#e08e0c" stroke-width="13" stroke-linecap="round" />
-                <path d="M87 92 Q 93 112, 71 113" fill="none" stroke="#e08e0c" stroke-width="13" stroke-linecap="round" />
-                <!-- hoodie -->
-                <path d="M48 116 C 44 86, 54 74, 70 74 C 86 74, 96 86, 92 116 C 92 121, 83 123, 70 123 C 57 123, 48 121, 48 116 Z" fill="url(#hoodie)" />
-                <!-- collar -->
-                <path d="M63 75 L77 75 L70 86 Z" fill="#cfd2da" />
-                <!-- clasped hands -->
-                <ellipse cx="70" cy="113" rx="10" ry="7" fill="#e9b48f" />
-                <!-- neck -->
-                <rect x="63" y="62" width="14" height="14" rx="6" fill="#dba47e" />
-                <!-- head -->
-                <circle cx="70" cy="46" r="24" fill="#e9b48f" />
-                <!-- hair -->
-                <path d="M45 47 C 43 25, 58 17, 70 17 C 83 17, 97 26, 95 47 C 90 38, 84 34, 78 34 C 71 29, 59 31, 54 38 C 50 41, 47 44, 45 47 Z" fill="#6e4a30" />
-                <!-- cheeks -->
-                <ellipse cx="53" cy="54" rx="5" ry="3.4" fill="#f4a0a0" opacity="0.85" />
-                <ellipse cx="87" cy="54" rx="5" ry="3.4" fill="#f4a0a0" opacity="0.85" />
-                <!-- eyes -->
-                <circle cx="61" cy="47" r="3.3" fill="#2b2b32" />
-                <circle cx="79" cy="47" r="3.3" fill="#2b2b32" />
-                <!-- smile -->
-                <path d="M63 55 Q 70 61 77 55" fill="none" stroke="#2b2b32" stroke-width="2.6" stroke-linecap="round" />
+                <!-- ground shadow -->
+                <ellipse cx="80" cy="172" rx="50" ry="8" fill="#000" opacity="0.22" />
+                <!-- long hair (behind) -->
+                <path fill="url(#av-hair)" d="M80 24 C53 24 43 47 45 77 C46 106 41 133 52 151 C57 160 69 157 68 146 C65 122 67 98 73 86 L87 86 C93 98 95 122 92 146 C91 157 103 160 108 151 C119 133 114 106 115 77 C117 47 107 24 80 24 Z" />
+                <!-- crossed legs + shoes -->
+                <path fill="url(#av-pants)" d="M80 116 C52 116 38 134 38 149 C38 158 47 160 58 157 L102 157 C113 160 122 158 122 149 C122 134 108 116 80 116 Z" />
+                <ellipse cx="60" cy="158" rx="10" ry="6" fill="#f3eef0" />
+                <ellipse cx="100" cy="158" rx="10" ry="6" fill="#f3eef0" />
+                <!-- arms + sweater -->
+                <path d="M60 101 Q52 125 78 124" fill="none" stroke="#0e9488" stroke-width="14" stroke-linecap="round" />
+                <path d="M100 101 Q108 125 82 124" fill="none" stroke="#0e9488" stroke-width="14" stroke-linecap="round" />
+                <path fill="url(#av-top)" d="M56 126 C50 96 60 84 80 84 C100 84 110 96 104 126 C104 131 94 133 80 133 C66 133 56 131 56 126 Z" />
+                <path d="M64 93 C72 88 88 88 96 93" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="3" stroke-linecap="round" />
+                <path d="M73 85 L87 85 L80 95 Z" fill="#0c857a" />
+                <ellipse cx="80" cy="124" rx="11" ry="7.5" fill="url(#av-skin)" />
+                <!-- neck + head -->
+                <rect x="72" y="71" width="16" height="17" rx="7" fill="#cf9468" />
+                <circle cx="80" cy="53" r="25" fill="url(#av-skin)" />
+                <!-- bangs + side strands -->
+                <path fill="url(#av-hair)" d="M53 58 C51 32 66 22 80 22 C94 22 109 32 107 58 C103 46 96 41 89 42 C95 39 86 32 80 32 C74 32 70 35 67 40 C72 35 63 36 59 45 C56 50 54 54 53 58 Z" />
+                <path fill="url(#av-hair)" d="M54 50 C49 61 50 73 55 82 C57 74 56 63 59 55 Z" />
+                <path fill="url(#av-hair)" d="M106 50 C111 61 110 73 105 82 C103 74 104 63 101 55 Z" />
+                <path d="M68 29 C74 25 85 25 91 29" fill="none" stroke="#6e5043" stroke-opacity="0.5" stroke-width="2.2" stroke-linecap="round" />
+                <!-- earrings -->
+                <circle cx="56" cy="67" r="2.8" fill="url(#av-ear)" />
+                <circle cx="104" cy="67" r="2.8" fill="url(#av-ear)" />
+                <!-- face -->
+                <path d="M64 47 Q70 44 76 47" fill="none" stroke="#3c2b24" stroke-width="2" stroke-linecap="round" />
+                <path d="M84 47 Q90 44 96 47" fill="none" stroke="#3c2b24" stroke-width="2" stroke-linecap="round" />
+                <ellipse cx="70" cy="54" rx="3.6" ry="4.3" fill="#2b2630" />
+                <ellipse cx="90" cy="54" rx="3.6" ry="4.3" fill="#2b2630" />
+                <circle cx="71.2" cy="52.4" r="1.1" fill="#fff" />
+                <circle cx="91.2" cy="52.4" r="1.1" fill="#fff" />
+                <path d="M65.5 51 l-3 -2 M94.5 51 l3 -2" stroke="#2b2630" stroke-width="1.4" stroke-linecap="round" />
+                <path d="M80 56 q1.6 3 -1.2 4.2" fill="none" stroke="#c2855a" stroke-width="1.4" stroke-linecap="round" />
+                <ellipse cx="63" cy="62" rx="5" ry="3.2" fill="#ef8a8a" opacity="0.5" />
+                <ellipse cx="97" cy="62" rx="5" ry="3.2" fill="#ef8a8a" opacity="0.5" />
+                <path d="M73 63 Q80 69 87 63" fill="none" stroke="#b15c4b" stroke-width="2.4" stroke-linecap="round" />
               </svg>
             </div>
           </div>

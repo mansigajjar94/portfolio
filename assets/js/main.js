@@ -376,8 +376,17 @@
   if (arcHost) {
     const NS = "http://www.w3.org/2000/svg";
     const W = 1000, H = 560, cx = W / 2, cy = H - 24;
-    const bands = ["#ef4444", "#f59e0b", "#22c55e", "#3b82f6", "#a855f7"]; // inner → outer
-    const RAYS = 21, PER = 12;
+    // Modern brand-gradient sweep (rose → violet → indigo → sky) rather
+    // than a literal rainbow. Each ray gets one interpolated colour.
+    const stops = [[251, 113, 133], [192, 132, 252], [129, 140, 248], [56, 189, 248]];
+    const colorAt = (t) => {
+      const seg = Math.max(0, Math.min(1, t)) * (stops.length - 1);
+      const k = Math.min(stops.length - 2, Math.floor(seg));
+      const f = seg - k;
+      const ch = (c) => Math.round(stops[k][c] + (stops[k + 1][c] - stops[k][c]) * f);
+      return `rgb(${ch(0)}, ${ch(1)}, ${ch(2)})`;
+    };
+    const RAYS = 23, PER = 12;
     const spread = (142 * Math.PI) / 180;
     const start = -spread / 2;
     const rInner = 72, rStep = 33, dashLen = 26, dashW = 15;
@@ -390,6 +399,7 @@
       const ang = start + (i / (RAYS - 1)) * spread;
       const dx = Math.sin(ang), dy = -Math.cos(ang);
       const rot = (Math.atan2(dy, dx) * 180) / Math.PI;
+      const rayColor = colorAt(i / (RAYS - 1));
       for (let j = 0; j < PER; j++) {
         const r = rInner + j * rStep;
         const x = cx + dx * r, y = cy + dy * r;
@@ -400,7 +410,7 @@
         rect.setAttribute("height", dashW);
         rect.setAttribute("rx", (dashW / 2).toFixed(1));
         rect.setAttribute("transform", `rotate(${rot.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})`);
-        rect.setAttribute("fill", bands[Math.min(bands.length - 1, Math.floor((j / PER) * bands.length))]);
+        rect.setAttribute("fill", rayColor);
         rect.setAttribute("class", "arc-bar");
         if (!reduceMotion) rect.style.animationDelay = `${(j * 110 + i * 26) % 2400}ms`;
         svg.appendChild(rect);
@@ -410,26 +420,37 @@
   }
 
   /* --------------------------------------------------------------
-     12. Contact form — sends real email via Web3Forms (no backend).
+     12. Contact form.
 
-     >>> TO RECEIVE MESSAGES (one-time setup):
-         1. Go to https://web3forms.com, enter gajjarmansi94@gmail.com
-         2. Copy the free Access Key they email you
-         3. Paste it into WEB3FORMS_KEY below, replacing the placeholder.
-         Submissions then land in your inbox — no mail app required.
+     DEFAULT (no setup needed): opens a pre-filled Gmail compose window
+     in a new tab — the visitor just clicks "Send". Nothing to configure.
 
-     Until a key is set, the form falls back to opening a mail client.
+     OPTIONAL UPGRADE — seamless, no compose step, lands straight in your
+     inbox for ALL visitors (even non-Gmail users): get a free key at
+     https://web3forms.com (enter gajjarmansi94@gmail.com) and paste it
+     into WEB3FORMS_KEY. When a key is set, that path is used instead.
      -------------------------------------------------------------- */
   const form = $("[data-contact-form]");
   const status = $("[data-form-status]");
   const RECIPIENT = "gajjarmansi94@gmail.com";
-  const WEB3FORMS_KEY = "YOUR_ACCESS_KEY_HERE"; // <-- paste your Web3Forms key
+  const WEB3FORMS_KEY = ""; // leave empty to use Gmail compose (your preference)
 
   const setStatus = (msg, state) => {
     if (!status) return;
     status.textContent = msg;
     if (state) status.setAttribute("data-state", state);
     else status.removeAttribute("data-state");
+  };
+
+  // Open Gmail's web compose, pre-filled. Synchronous (so the browser
+  // treats it as user-initiated, not a blocked popup). If a popup is
+  // still blocked, fall back to the visitor's default mail app.
+  const openGmailCompose = (subject, body) => {
+    const su = encodeURIComponent(subject);
+    const bd = encodeURIComponent(body);
+    const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(RECIPIENT)}&su=${su}&body=${bd}`;
+    const win = window.open(url, "_blank", "noopener,noreferrer");
+    if (!win) window.location.href = `mailto:${RECIPIENT}?subject=${su}&body=${bd}`;
   };
 
   if (form) {
@@ -448,24 +469,27 @@
         return;
       }
 
-      const keyMissing = !WEB3FORMS_KEY || WEB3FORMS_KEY === "YOUR_ACCESS_KEY_HERE";
-      if (keyMissing) {
-        // No endpoint configured yet — fall back to the visitor's mail app.
-        const subject = encodeURIComponent(`Portfolio enquiry — ${name}`);
-        const bodyText = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-        window.location.href = `mailto:${RECIPIENT}?subject=${subject}&body=${bodyText}`;
-        setStatus(`Opening your email app… if nothing happens, write to ${RECIPIENT}.`);
+      const subject = `Portfolio enquiry — ${name}`;
+      const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+      const keySet = WEB3FORMS_KEY && WEB3FORMS_KEY !== "YOUR_ACCESS_KEY_HERE";
+
+      // --- Preferred path: Gmail compose (no key configured) ---
+      if (!keySet) {
+        openGmailCompose(subject, body);
+        setStatus("Opening Gmail in a new tab — just press Send to finish. ✨", "success");
+        playSound("success");
+        form.reset();
         return;
       }
 
+      // --- Optional path: seamless Web3Forms delivery ---
       const submitBtn = form.querySelector('button[type="submit"]');
       setStatus("Sending…");
       form.setAttribute("aria-busy", "true");
       if (submitBtn) submitBtn.disabled = true;
-
       try {
         data.append("access_key", WEB3FORMS_KEY);
-        data.append("subject", `Portfolio enquiry — ${name}`);
+        data.append("subject", subject);
         data.append("from_name", name);
         const res = await fetch("https://api.web3forms.com/submit", {
           method: "POST",

@@ -588,7 +588,12 @@ body.has-pointer .spotlight { opacity: 1; }
 /* The SVG sizes by its own aspect ratio (height:auto) and anchors to the
    bottom of the stage, so the fan rises cleanly from behind the avatar. */
 .stage__arc { position: absolute; left: 0; right: 0; bottom: 0; }
-.stage__arc svg { width: 100%; height: auto; display: block; }
+.stage__arc svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 0 6px color-mix(in oklab, var(--grad-2) 40%, transparent));
+}
 .arc-bar { animation: barPulse 2.6s var(--ease) infinite; }
 @keyframes barPulse {
   0%, 100% { opacity: 0.5; }
@@ -599,11 +604,11 @@ body.has-pointer .spotlight { opacity: 1; }
 .avatar {
   position: absolute;
   left: 50%;
-  bottom: -4px;
+  bottom: -6px;
   transform: translateX(-50%);
-  width: 7.5rem;
+  width: 8rem;
   z-index: 2;
-  filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.4));
+  filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.38));
 }
 .avatar svg { width: 100%; height: auto; display: block; }
 .stage__caption { text-align: center; margin-bottom: var(--space-2); }
