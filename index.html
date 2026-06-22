@@ -37,8 +37,8 @@
     />
 
     <link rel="stylesheet" href="assets/css/reset.css" />
-    <link rel="stylesheet" href="assets/css/styles.css?v=3" />
-    <script src="assets/js/main.js?v=3" defer></script>
+    <link rel="stylesheet" href="assets/css/styles.css?v=5" />
+    <script src="assets/js/main.js?v=5" defer></script>
   </head>
 
   <body>
@@ -64,6 +64,7 @@
         <nav class="nav" aria-label="Primary">
           <a class="nav__link" href="#about" data-nav-link>About</a>
           <a class="nav__link" href="#skills" data-nav-link>Skills</a>
+          <a class="nav__link" href="#projects" data-nav-link>Projects</a>
           <a class="nav__link" href="#experience" data-nav-link>Work</a>
           <a class="nav__link" href="#contact" data-nav-link>Contact</a>
         </nav>
@@ -103,6 +104,7 @@
       <ul class="mobile-nav__list">
         <li><a class="mobile-nav__link" href="#about">About</a></li>
         <li><a class="mobile-nav__link" href="#skills">Skills</a></li>
+        <li><a class="mobile-nav__link" href="#projects">Projects</a></li>
         <li><a class="mobile-nav__link" href="#experience">Work</a></li>
         <li><a class="mobile-nav__link" href="#contact">Contact</a></li>
       </ul>
@@ -171,7 +173,7 @@
           <div class="stage">
             <div class="stage__arc" data-arc aria-hidden="true"></div>
             <div class="avatar" aria-hidden="true">
-              <svg viewBox="0 0 160 184" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a woman sitting cross-legged">
+              <svg class="avatar__sit" viewBox="0 0 160 184" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a woman sitting cross-legged">
                 <defs>
                   <radialGradient id="av-skin" cx="50%" cy="38%" r="72%">
                     <stop offset="0" stop-color="#f2c49d" />
@@ -232,6 +234,37 @@
                 <ellipse cx="63" cy="62" rx="5" ry="3.2" fill="#ef8a8a" opacity="0.5" />
                 <ellipse cx="97" cy="62" rx="5" ry="3.2" fill="#ef8a8a" opacity="0.5" />
                 <path d="M73 63 Q80 69 87 63" fill="none" stroke="#b15c4b" stroke-width="2.4" stroke-linecap="round" />
+              </svg>
+              <!-- Standing pose (reuses the gradients defined above); fades in on card hover. -->
+              <svg class="avatar__stand" viewBox="0 0 120 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <ellipse cx="60" cy="201" rx="34" ry="6" fill="#000" opacity="0.22" />
+                <path fill="url(#av-hair)" d="M60 12 C40 12 32 30 33 52 C34 74 30 96 36 112 C39 121 49 119 49 110 C47 92 49 70 53 60 L67 60 C71 70 73 92 71 110 C71 119 81 121 84 112 C90 96 86 74 87 52 C88 30 80 12 60 12 Z" />
+                <path fill="url(#av-pants)" d="M48 116 L46 188 C46 192 56 192 56 188 L59 140 L61 140 L64 188 C64 192 74 192 74 188 L72 116 Z" />
+                <ellipse cx="50" cy="191" rx="8" ry="5" fill="#f3eef0" />
+                <ellipse cx="70" cy="191" rx="8" ry="5" fill="#f3eef0" />
+                <path d="M44 84 Q36 104 40 122" fill="none" stroke="#0e9488" stroke-width="12" stroke-linecap="round" />
+                <path d="M76 84 Q88 74 86 58" fill="none" stroke="#0e9488" stroke-width="12" stroke-linecap="round" />
+                <path fill="url(#av-top)" d="M42 122 C40 92 48 78 60 78 C72 78 80 92 78 122 C78 126 70 128 60 128 C50 128 42 126 42 122 Z" />
+                <path d="M50 86 C56 82 64 82 70 86" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="2.6" stroke-linecap="round" />
+                <path d="M55 79 L65 79 L60 87 Z" fill="#0c857a" />
+                <circle cx="40" cy="123" r="5.5" fill="url(#av-skin)" />
+                <circle cx="86" cy="56" r="5.5" fill="url(#av-skin)" />
+                <rect x="53" y="54" width="14" height="14" rx="6" fill="#cf9468" />
+                <circle cx="60" cy="40" r="22" fill="url(#av-skin)" />
+                <path fill="url(#av-hair)" d="M39 44 C37 20 51 11 60 11 C69 11 83 20 81 44 C77 33 71 29 65 30 C70 27 63 21 60 21 C56 21 52 24 49 28 C53 24 45 25 42 33 C40 37 39 41 39 44 Z" />
+                <path fill="url(#av-hair)" d="M40 37 C35 47 36 59 40 67 C42 59 41 49 44 42 Z" />
+                <path fill="url(#av-hair)" d="M80 37 C85 47 84 59 80 67 C78 59 79 49 76 42 Z" />
+                <circle cx="41" cy="52" r="2.4" fill="url(#av-ear)" />
+                <circle cx="79" cy="52" r="2.4" fill="url(#av-ear)" />
+                <path d="M49 35 Q54 32 59 35" fill="none" stroke="#3c2b24" stroke-width="1.8" stroke-linecap="round" />
+                <path d="M61 35 Q66 32 71 35" fill="none" stroke="#3c2b24" stroke-width="1.8" stroke-linecap="round" />
+                <ellipse cx="53" cy="41" rx="3.2" ry="3.8" fill="#2b2630" />
+                <ellipse cx="67" cy="41" rx="3.2" ry="3.8" fill="#2b2630" />
+                <circle cx="54" cy="39.8" r="1" fill="#fff" />
+                <circle cx="68" cy="39.8" r="1" fill="#fff" />
+                <ellipse cx="47" cy="48" rx="4.2" ry="2.7" fill="#ef8a8a" opacity="0.5" />
+                <ellipse cx="73" cy="48" rx="4.2" ry="2.7" fill="#ef8a8a" opacity="0.5" />
+                <path d="M54 49 Q60 54 66 49" fill="none" stroke="#b15c4b" stroke-width="2.1" stroke-linecap="round" />
               </svg>
             </div>
           </div>
@@ -446,6 +479,48 @@
             <div class="chips"><span class="chip">Mentorship</span><span class="chip">Code review</span><span class="chip">Client communication</span><span class="chip">Agile</span></div>
           </article>
         </div>
+      </section>
+
+      <!-- ===================================================== PROJECTS -->
+      <section class="container section" id="projects">
+        <div class="section__head reveal">
+          <span class="eyebrow">Featured project</span>
+          <h2>A live project, shipped and responsive.</h2>
+          <p>Not a mockup — a real, deployed site you can open right now. Built mobile-first, so it holds its shape on phones, tablets and desktops alike.</p>
+        </div>
+
+        <article class="card card--glow project reveal" data-tilt>
+          <div class="project__media">
+            <div class="browser">
+              <div class="browser__bar" aria-hidden="true">
+                <span class="browser__dot"></span>
+                <span class="browser__dot"></span>
+                <span class="browser__dot"></span>
+                <span class="browser__url">drift-wellness.vercel.app</span>
+              </div>
+              <a class="browser__shot" href="https://drift-wellness.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Open the Drift live site in a new tab">
+                <img src="assets/img/drift-preview.png" width="1280" height="800" loading="lazy" decoding="async" alt="Drift meditation app landing page with the headline 'Stillness, in small doses.' on a soft sage-green design" />
+              </a>
+            </div>
+          </div>
+
+          <div class="project__body">
+            <h3 class="project__title">Drift — a meditation app</h3>
+            <p class="project__desc">A calm, minimal landing page for a mindfulness app — <em>“Stillness, in small doses.”</em> Soft natural imagery, generous whitespace and gentle motion, designed to feel as unhurried as the product itself.</p>
+            <div class="chips" aria-label="Highlights">
+              <span class="chip">Responsive</span>
+              <span class="chip">Landing page</span>
+              <span class="chip">Micro-interactions</span>
+              <span class="chip">Deployed on Vercel</span>
+            </div>
+            <div class="project__actions">
+              <a class="btn btn--primary" href="https://drift-wellness.vercel.app/" target="_blank" rel="noopener noreferrer">
+                Visit live site
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
+              </a>
+            </div>
+          </div>
+        </article>
       </section>
 
       <!-- ===================================================== EXPERIENCE -->

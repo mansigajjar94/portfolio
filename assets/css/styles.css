@@ -610,7 +610,32 @@ body.has-pointer .spotlight { opacity: 1; }
   z-index: 2;
   filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.38));
 }
-.avatar svg { width: 100%; height: auto; display: block; }
+/* Two poses stacked: sitting in flow (sets the height), standing as an
+   overlay that fades in on hover — she "stands up" and waves. */
+.avatar__sit {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity 0.3s var(--ease);
+}
+.avatar__stand {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 82%;
+  height: auto;
+  transform: translateX(-50%) translateY(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease), transform 0.5s var(--spring);
+}
+.profile-card:hover .avatar__sit { opacity: 0; }
+.profile-card:hover .avatar__stand {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+/* No hover on touch devices — keep the sitting pose only. */
+@media (hover: none) { .avatar__stand { display: none; } }
 .stage__caption { text-align: center; margin-bottom: var(--space-2); }
 .profile-card__name { font-size: var(--fs-lg); }
 .profile-card__role { color: var(--text-soft); font-size: var(--fs-sm); }
@@ -907,6 +932,63 @@ body.has-pointer .spotlight { opacity: 1; }
   transition: top var(--duration) var(--ease);
 }
 .skip-link:focus { top: var(--space-4); }
+
+/* ============================================================
+   FEATURED PROJECT — browser-framed preview + details, responsive.
+   ============================================================ */
+.project {
+  display: grid;
+  gap: var(--space-6);
+  align-items: center;
+}
+@media (min-width: 880px) {
+  .project { grid-template-columns: 1.25fr 1fr; gap: var(--space-7); }
+}
+.project__media { min-width: 0; }
+.browser {
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-sunken);
+  box-shadow: var(--shadow-lifted);
+}
+.browser__bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 12px;
+  background: var(--bg-elevated-2);
+  border-bottom: 1px solid var(--border);
+}
+.browser__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border-strong); flex: none; }
+.browser__dot:nth-child(1) { background: #fb7185; }
+.browser__dot:nth-child(2) { background: #fbbf24; }
+.browser__dot:nth-child(3) { background: #34d399; }
+.browser__url {
+  margin-left: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.browser__shot { display: block; overflow: hidden; }
+.browser__shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1280 / 800;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.5s var(--ease);
+}
+.browser__shot:hover img { transform: scale(1.04); }
+.project__title { font-size: var(--fs-xl); }
+.project__desc { margin: var(--space-3) 0 var(--space-4); }
+.project__desc em { color: var(--text); font-style: italic; }
+.project__actions { margin-top: var(--space-5); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
